@@ -10,6 +10,12 @@
 #import "JImageView.h"
 #import "UIImage+UIImageScale.h"
 
+@interface JImageView ()
+
+@property (nonatomic, strong) UIScrollView *scrollView;
+
+@end
+
 @implementation JImageView
 
 @synthesize loadingView = _loadingView;
@@ -25,12 +31,15 @@
         _loadingView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake((self.frame.size.width - 20)/2, 
                                                                                  (self.frame.size.height -20)/2, 
                                                                                  20, 20)];
+        self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
+        [self addSubview:self.scrollView];
         _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
-        
+        _imageView.contentMode = UIViewContentModeCenter;
         _isLoading = NO;
         _loadFinish = NO;
-        [self addSubview:_imageView];
-        [_imageView addSubview:_loadingView];
+        [self.scrollView addSubview:_imageView];
+//        [self addSubview:_imageView];
+//        [_imageView addSubview:_loadingView];
     }
     return self;
 }

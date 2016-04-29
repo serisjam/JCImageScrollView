@@ -54,7 +54,7 @@
     if (self) {
         // Initialization code
         _currentPageIndex = 0;
-        
+        _useParallaxEffect = YES;
         _scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
         _backgroundView = [[UIImageView alloc] initWithFrame:self.bounds];
         self.pageControl = [[UIPageControl alloc] init];
@@ -107,7 +107,6 @@
     [_leftImageView startRequestWithURL:[self.imagePaths objectSafetyAtIndex:[self checkNextPageIndex:_currentPageIndex-1]]];
     [_centerImageView startRequestWithURL:[self.imagePaths objectSafetyAtIndex:[self checkNextPageIndex:_currentPageIndex]]];
     [_rightImageView startRequestWithURL:[self.imagePaths objectSafetyAtIndex:[self checkNextPageIndex:_currentPageIndex+1]]];
-    
     [_scrollView setContentOffset:CGPointMake(_scrollView.frame.size.width, 0)];
 }
 
@@ -135,11 +134,16 @@
         [self configContentViews];
     }
     
-    [self.pageControl setCurrentPage:self.currentPageIndex];
+    self.pageControl.currentPage = self.currentPageIndex;
+
+    if (_useParallaxEffect) {
+        _leftImageView.imageView.frame = CGRectMake(scrollView.contentOffset.x, 0, CGRectGetWidth(self.scrollView.frame) - scrollView.contentOffset.x, CGRectGetHeight(self.scrollView.frame));
+        _centerImageView.imageView.frame = CGRectMake(0, 0, scrollView.contentOffset.x, CGRectGetHeight(self.scrollView.frame));
+        _rightImageView.imageView.frame = CGRectMake(scrollView.contentOffset.x-CGRectGetWidth(self.scrollView.frame), 0, CGRectGetWidth(self.scrollView.frame) - scrollView.contentOffset.x, CGRectGetHeight(self.scrollView.frame));
+    }
 }
 
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-{
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     [scrollView setContentOffset:CGPointMake(CGRectGetWidth(scrollView.frame), 0) animated:YES];
 }
 

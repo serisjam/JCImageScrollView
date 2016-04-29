@@ -25,6 +25,9 @@
 @property (nonatomic, assign) NSTimeInterval autoDuration;
 @property (nonatomic, assign) id<JCImageScrollViewDelegate> delegate;
 
+//默认开启滚动视差效果
+@property (nonatomic, assign) BOOL useParallaxEffect;
+
 - (id)initWithFrame:(CGRect)frame;
 - (void)loadImageURL:(NSArray *)urls;
 
