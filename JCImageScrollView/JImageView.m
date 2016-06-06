@@ -32,6 +32,7 @@
                                                                                  (self.frame.size.height -20)/2, 
                                                                                  20, 20)];
         self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
+        [self.scrollView setUserInteractionEnabled:NO];
         [self addSubview:self.scrollView];
         _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
         _imageView.contentMode = UIViewContentModeCenter;

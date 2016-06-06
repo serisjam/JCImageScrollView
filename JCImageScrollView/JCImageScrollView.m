@@ -54,7 +54,7 @@
     if (self) {
         // Initialization code
         _currentPageIndex = 0;
-        _useParallaxEffect = YES;
+        _useParallaxEffect = NO;
         _scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
         _backgroundView = [[UIImageView alloc] initWithFrame:self.bounds];
         self.pageControl = [[UIPageControl alloc] init];

@@ -24,6 +24,7 @@
     [super viewWillAppear:animated];
     
     JCImageScrollView *imageScrollView = [[JCImageScrollView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0f, 120.0f)];
+    [imageScrollView setUseParallaxEffect:YES];
     [self.view addSubview:imageScrollView];
     
     imageScrollView.autoDuration = 3.0f;
